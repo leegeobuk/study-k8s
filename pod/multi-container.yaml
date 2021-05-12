@@ -10,7 +10,7 @@ metadata:
 spec:
   containers:
     - name: app
-      image: ghcr.io/subicura/counter:latest
+      image: "ghcr.io/subicura/counter:latest"
       env:
         - name: REDIS_HOST
           value: "localhost"
