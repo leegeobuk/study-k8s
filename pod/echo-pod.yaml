@@ -1,0 +1,11 @@
+# This is an example yaml file for creating pod
+apiVersion: v1
+kind: Pod
+metadata:
+  name: echo
+  labels:
+    app: echo
+spec:
+  containers:
+    - name: app
+      image: "ghcr.io/subicura/echo:v1"

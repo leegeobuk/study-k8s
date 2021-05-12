@@ -1,0 +1,18 @@
+# This is an example of a Pod with multiple containers.
+# Typically, a Pod contains one container but sometimes have multiple containers.
+# Containers in the same Pod can share localhost network and directories.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: counter
+  labels:
+    app: counter
+spec:
+  containers:
+    - name: app
+      image: ghcr.io/subicura/counter:latest
+      env:
+        - name: REDIS_HOST
+          value: "localhost"
+    - name: db
+      image: redis

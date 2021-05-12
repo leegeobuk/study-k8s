@@ -1,0 +1,24 @@
+# Thgis is an example of livenessProbe.
+# livenessProbe restarts Pod if the container cannot start for some reason.
+# To check if Pod is ready, a method to check Pod status must be specified.
+# In this example, http request to path that doesn't exist is sent.
+# Aside from httpGet, tcpSocker, exec can be used as well.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: echo-lp
+  labels:
+    app: echo
+spec:
+  containers:
+    - name: app
+      image: "ghcr.io/subicura/echo:v1"
+      livenessProbe:
+        httpGet:
+          path: /not/exist
+          port: 8080
+        initialDelaySeconds: 5
+        timeoutSeconds: 2
+        periodSeconds: 5
+        failureThreshold: 1
+        
