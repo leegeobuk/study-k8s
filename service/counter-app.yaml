@@ -1,0 +1,24 @@
+# This example is used to examine if Service defined in redis-svc.yaml can be accessed.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: counter
+spec:
+  selector:
+    matchLabels:
+      app: counter
+      tier: app
+  template:
+    metadata:
+      labels:
+        app: counter
+        tier: app
+    spec:
+      containers:
+        - name: counter
+          image: "ghcr.io/subicura/counter:latest"
+          env:
+            - name: REDIS_HOST
+              value: "redis"
+            - name: REDIS_PORT
+              value: "6379"
