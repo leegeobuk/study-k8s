@@ -1,0 +1,18 @@
+# This example shows how volume(hostPath) can be used.
+# hostPath can be used to mount a directory in a node to pods of the node.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: host-log
+spec:
+  containers:
+    - name: log
+      image: busybox
+      args: ["/bin/sh", "-c", "sleep infinitely"]
+      volumeMounts:
+        - name: varlog
+          mountPath: /host/var/log
+  volumes:
+    - name: varlog
+      hostPath:
+        path: /var/log
