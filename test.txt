@@ -1,1 +1,1 @@
-This is only a test file for checking if PAT is set properly in local.
+This is only a test file for checking if PAT is set locally.
