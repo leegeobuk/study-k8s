@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: peer1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: peer1
+  template:
+    metadata:
+      labels:
+        name: peer1
+        has-mbpu: "true"
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node
+                    operator: In
+                    values:
+                      - worker1
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                - key: has-mbpu
+                  operator: In
+                  values:
+                    - "true"
+              topologyKey: "kubernetes.io/hostname"
+      containers:
+        - name: peer1
+          image: alpine
